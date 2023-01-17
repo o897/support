@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Admin;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -78,7 +79,13 @@ class AdminController extends Controller
     public function edit($id)
     {
         $ticket = Ticket::find($id);
-        return view('admin.edit')->with('ticket',$ticket);
+
+        $admins = User::all()->where('role',2);
+
+        return view('admin.edit')->with([
+            'ticket' => $ticket,
+            'admins' => $admins
+        ]);
     }
 
     /**
@@ -88,9 +95,20 @@ class AdminController extends Controller
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, $id)
     {
-        //
+       
+        $request->validate([
+            'agent' => 'required',
+        ]);
+
+        $agent_name = User::where('id',$request->input('agent'))->value('name');
+
+        $ticket_update = Ticket::where('id',$id)
+        ->update(['agent' => $agent_name]);
+
+        dd("Success");
+        return redirect->back();
     }
 
     /**

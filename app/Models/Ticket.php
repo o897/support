@@ -10,4 +10,11 @@ class Ticket extends Model
     use HasFactory;
 
     protected $fillable = ['customer_email','title', 'description','label','categories','priority'];
+
+    protected $primaryKey = 'id';
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'name',
         'email',
@@ -50,6 +52,7 @@ class User extends Authenticatable
     // }
 
     public function tickets() {
-        return $this->belongsTo(Ticket::class);
+
+        return $this->hasMany(User::class);
     }
 }
