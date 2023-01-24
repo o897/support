@@ -99,7 +99,7 @@
                         
                         <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                           <span class="text-xs font-semibold leading-tight dark:text-white dark:opacity-80 text-slate-400">
-                            <a href="/admin/{{ $ticket->id }}/edit">{{ $ticket->id }}</a> 
+                            <a href="/admin/{{ $ticket->ticket_id }}/edit">{{ $ticket->ticket_id }}</a> 
                           </span>               
 
                         </td>

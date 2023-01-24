@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AgentController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 
 /*
@@ -39,6 +40,7 @@ Route::post('/logout',[LoginController::class,'logout'])->name('logout');
 
 Route::resource('user',UserController::class);
 Route::resource('admin',AdminController::class);
+Route::resource('agent',AgentController::class);
 
 
 Route::get('/', function () {

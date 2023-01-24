@@ -5,10 +5,11 @@
 <script src="https://unpkg.com/@popperjs/core@2"></script>
   <!-- Main Styling -->
 <link href="{{asset('argontheme/css/argon-dashboard-tailwind.css?v=1.0.1')}}" rel="stylesheet" />
+
 @include('layouts.sidenav')
 <!-- component -->
 
-    <form action="/admin/{{ $ticket->id}}" method="POST" class="flex flex-col w-full p-10 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-1/2">
+    <form action="/admin/{{ $ticket->ticket_id}}" method="POST" class="flex flex-col w-full p-10 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-1/2">
         @csrf
         {{-- it is impossible to update something with a post request --}}
         {{-- so we'd have to use a put request something our csrf will understand --}}
@@ -16,7 +17,7 @@
         @method('PUT')
     <div class="relative pt-4">
       <label for="name" class="text-base leading-7 text-blueGray-500">Ticket Id</label>
-      <input type="text" name ="id" value="{{ $ticket->id }}" placeholder="{{ $ticket->id }}" class="w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2">
+      <input type="text" name ="id" value="{{ $ticket->ticket_id }}" placeholder="{{ $ticket->ticket_id }}" class="w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2">
     </div>
     <div class="relative pt-4">
       <label for="name" class="text-base leading-7 text-blueGray-500">Name</label>
@@ -42,7 +43,7 @@
       <label for="name"class="text-base leading-7 text-blueGray-500">Agent</label>
       <select name="agent" class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2">
         @foreach ($admins as $admin)
-        <option value="{{ $admin->id }}">{{ $admin->name }}</option>  
+        <option value="{{ $admin->id }}">{{ $admin->id }} - {{ $admin->name }}</option>  
         @endforeach  
       </select>
     </div>
@@ -54,7 +55,8 @@
     </div>
   
     <div class="flex items-center w-full pt-4 mb-4">
-      <button class="w-full py-3 text-base text-white transition duration-500 ease-in-out transform bg-blue-600 border-blue-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-blue-800 "> Assign ticket </button>
+      {{-- <button class="w-full py-3 text-base text-white transition duration-500 ease-in-out transform bg-blue-600 border-blue-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-blue-800 "> Assign ticket </button> --}}
+      <button>Assign Ticket</button>
     </div>
     <hr class="my-4 border-gray-200">
    

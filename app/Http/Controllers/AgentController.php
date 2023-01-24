@@ -2,35 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Admin;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class AgentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        //include the middlewares
-    }
-
-
     public function index()
     {
-        // $tickets_count = Ticket::all()->count();
         $tickets = Ticket::all();
-        
-        return view('admin.index')->with([
-            'tickets' => $tickets,
 
-        
+        return view('agent.index')->with([
+            'tickets' => $tickets,
         ]);
-        
     }
 
     /**
@@ -40,7 +28,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        //
+        return view('agent.create');
     }
 
     /**
@@ -49,8 +38,6 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    
-
     public function store(Request $request)
     {
         //
@@ -59,64 +46,65 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $ticket = Ticket::find($id);
-        // dd($ticket);
-
-        return view('admin.show')->with('ticket',$ticket);
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        $ticket = Ticket::find($id);
+        // method to update the DB
+    //    dd($request->all());
 
-        $admins = User::all()->where('role',2);
-
-        return view('admin.edit')->with([
-            'ticket' => $ticket,
-            'admins' => $admins
-        ]);
+       //
+       $ticket = Ticket::find($id);
+       // dd($ticket);
+       return view('agent.edit')->with([
+           'ticket' => $ticket,
+       ]);
     }
+    
+    public function updateTicketStatus($id, Request $request)
+    {
+       
+    }
+
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin  $admin
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-       
-        $request->validate([
-            'agent' => 'required',
+        //
+        // dd($request->all());
+        $validatedData = $request->validate([
+            'status' => 'required|string', //|in:open,closed,pending'
         ]);
 
-        $agent_name = User::where('id',$request->input('agent'))->value('name');
-
-        $ticket_update = Ticket::where('id',$id)
-        ->update(['agent' => $agent_name]);
-
+        Ticket::where('ticket_id', $id)->update(['status' => $validatedData['status']]);
         return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy($id)
     {
         //
     }

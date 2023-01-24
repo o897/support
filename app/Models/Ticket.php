@@ -11,10 +11,14 @@ class Ticket extends Model
 
     protected $fillable = ['customer_email','title', 'description','label','categories','priority'];
 
-    protected $primaryKey = 'id';
+    //
+    public $incrementing = false; 
 
-    public function users()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $primaryKey = 'ticket_id';
+    
+
+    // public function users()
+    // {
+    //     return $this->belongsTo(User::class,'useri');
+    // }
 }

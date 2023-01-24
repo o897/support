@@ -1,40 +1,23 @@
-@extends('layouts.user')
-
-@section('content')
+@extends('layouts.agent')
 
 <div class="formbold-main-wrapper">
     <!-- Author: FormBold Team -->
     <!-- Learn More: https://formbold.com -->
     {{-- https://formbold.com/s/FORM_ID --}}
     <div class="formbold-form-wrapper">
-    <h1>Create ticket</h1>
-      <form action="/customer" method="POST" enctype="multipart/form-data">
+    <h1>User ticket</h1>
+      <form action="/user" method="POST" enctype="multipart/form-data">
         @csrf
-     
-        <div class="formbold-input-wrapp formbold-mb-3">
-          <label for="firstname" class=""> Title</label>
-  
-          <div>
-            <input
-              type="text"
-              name="title"
-              id="firstname"
-              placeholder="Title"
-              class="formbold-form-input"
-            />
-          </div>
-        </div>
-  
+       
         <div class="formbold-mb-3">
           <label for="age" class=""> Message </label>
-          <textarea id="message" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+          <textarea id="message" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Message"></textarea>
         </div>
   
         <div class="formbold-mb-3">
-          <label for="dob" class=""> Labels </label>
+          <label class=""> Labels </label>
         </div>
-        <div class="formbold-mb-3">
-                        
+        <div class="formbold-mb-3">            
             <div class="flex">
                 <div class="flex items-center mr-4">
                     <input id="inline-checkbox" name="label[]" type="checkbox" value="bug" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -49,14 +32,12 @@
                     <label for="inline-checked-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">enhancement</label>
                 </div>
             </div>
-
         </div>
   
         <div class="formbold-mb-3">
             <label for="dob" class=""> Categories </label>
           </div>
-          <div class="formbold-mb-3">
-                          
+          <div class="formbold-mb-3">                     
               <div class="flex">
                   <div class="flex items-center mr-4">
                       <input id="inline-checkbox"  name="categories[]"  value="Uncategorized" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -70,34 +51,23 @@
                       <input checked id="inline-checked-checkbox" name="categories[]"  value="Technical question" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                       <label for="inline-checked-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Technical questions</label>
                   </div>
-              </div>
-  
-          </div>
-  
-        <div class="formbold-mb-3">
 
-            <label for="priority" class="block mb-2 text-sm font-medium text-gray-900 ">Select an option</label>
+              </div>
+          </div>  
+
+          <div class="formbold-mb-3">
+
+            <label for="priority" class="block mb-2 text-sm font-medium text-gray-900 ">Priority</label>
             <select id="countries" name="priority" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option selected>Select the priority</option>
+              <option selected>Update ticket status</option>
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
+
             </select>
                               
-        </div>       
-  
-        {{-- <div class="formbold-mb-3">
-          <label for="upload" class="">
-            files
-          </label>
-          <input
-            type="file"
-            name="files"
-            id="upload"
-            class="formbold-form-input formbold-form-file"
-          />
-        </div> --}}
-  
+        </div>   
+
         <button class="formbold-btn">Submit</button>
       </form>
     </div>
@@ -280,4 +250,3 @@
       width: 45%;
     }
   </style>
-@endsection

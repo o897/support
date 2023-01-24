@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.index');
+        return view('user.create');
 
     }
 
@@ -34,7 +34,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
         // 1. Customer create a ticket
         $customer = Ticket::create([ //customer ticket
             'customer_email' => Auth::user()->email,
