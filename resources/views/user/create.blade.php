@@ -1,5 +1,7 @@
-@extends('layouts.agent')
-
+@vite('resources/css/app.css')
+@auth
+  <x-user-navbar/>
+@endauth
 <div class="formbold-main-wrapper">
     <!-- Author: FormBold Team -->
     <!-- Learn More: https://formbold.com -->
@@ -11,7 +13,7 @@
        
         <div class="formbold-mb-3">
           <label for="age" class=""> Message </label>
-          <textarea id="message" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Message"></textarea>
+          <textarea id="message" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Message"></textarea>
         </div>
   
         <div class="formbold-mb-3">
@@ -21,15 +23,15 @@
             <div class="flex">
                 <div class="flex items-center mr-4">
                     <input id="inline-checkbox" name="label[]" type="checkbox" value="bug" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="inline-checkbox" class="ml-2 text-sm px-2 font-medium text-gray-900 dark:text-gray-300">bug</label>
+                    <label for="inline-checkbox" class="ml-2 text-sm px-2 font-medium">bug</label>
                 </div>
                 <div class="flex items-center mr-4">
                     <input id="inline-2-checkbox" name="label[]" type="checkbox" value="question" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="inline-2-checkbox" class="ml-2 text-sm px-2 font-medium text-gray-900 dark:text-gray-300">question</label>
+                    <label for="inline-2-checkbox" class="ml-2 text-sm px-2 font-medium">question</label>
                 </div>
                 <div class="flex items-center mr-4">
                     <input checked id="inline-checked-checkbox" name="label[]" type="checkbox" value="enhancement" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="inline-checked-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">enhancement</label>
+                    <label for="inline-checked-checkbox" class="ml-2 text-sm font-medium">enhancement</label>
                 </div>
             </div>
         </div>
@@ -41,15 +43,15 @@
               <div class="flex">
                   <div class="flex items-center mr-4">
                       <input id="inline-checkbox"  name="categories[]"  value="Uncategorized" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                      <label for="inline-checkbox"  class="ml-2 text-sm px-2 font-medium text-gray-900 dark:text-gray-300">Uncategorized</label>
+                      <label for="inline-checkbox"  class="ml-2 text-sm px-2 font-medium">Uncategorized</label>
                   </div>
                   <div class="flex items-center mr-4">
                       <input id="inline-2-checkbox" name="categories[]" value="Billing/Payments" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                      <label for="inline-2-checkbox"  class="ml-2 text-sm px-2 font-medium text-gray-900 dark:text-gray-300">Billing/Payments</label>
+                      <label for="inline-2-checkbox"  class="ml-2 text-sm px-2 font-medium">Billing/Payments</label>
                   </div>
                   <div class="flex items-center mr-4">
                       <input checked id="inline-checked-checkbox" name="categories[]"  value="Technical question" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                      <label for="inline-checked-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Technical questions</label>
+                      <label for="inline-checked-checkbox" class="ml-2 text-sm px-2 font-medium">Technical questions</label>
                   </div>
 
               </div>
@@ -58,7 +60,7 @@
           <div class="formbold-mb-3">
 
             <label for="priority" class="block mb-2 text-sm font-medium text-gray-900 ">Priority</label>
-            <select id="countries" name="priority" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <select id="countries" name="priority" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option selected>Update ticket status</option>
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
@@ -72,6 +74,12 @@
       </form>
     </div>
   </div>
+  <li class="mt-0.5 w-full">
+    <form action="{{ route('logout')}}" method="POST">
+      @csrf
+     <button>Logout</button></span>
+    </form>
+  </li> 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     * {

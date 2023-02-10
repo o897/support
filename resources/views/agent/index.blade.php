@@ -1,492 +1,75 @@
-<!--
-
-=========================================================
-* Argon Dashboard 2 Tailwind - v1.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-tailwind
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-    <title>Agent</title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-     <!-- Nucleo Icons -->
-    <link href="{{ asset('argontheme/css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('argontheme/fonts/nucleo-icons.svg') }}" rel="stylesheet" />
-    <!-- Popper -->
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <!-- Main Styling -->
-    <link href="{{ asset('argontheme/css/argon-dashboard-tailwind.css?v=1.0.1')}}" rel="stylesheet" />
-  </head>
-
-  <body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
-    <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
-
-    <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
-      <div class="h-19">
-        <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times dark:text-white text-slate-400 xl:hidden" sidenav-close></i>
-        <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700" href="https://demos.creative-tim.com/argon-dashboard-tailwind/pages/dashboard.html" target="_blank">
-          <img src="{{ asset('argontheme/img/logo-ct-dark.png') }}" class="inline h-full max-w-full transition-all duration-200 dark:hidden ease-nav-brand max-h-8" alt="main_logo" />
-          <img src="{{ asset('argontheme/img/logo-ct.png') }}" class="hidden h-full max-w-full transition-all duration-200 dark:inline ease-nav-brand max-h-8" alt="main_logo" />
-          <span class="ml-1 font-semibold transition-all duration-200 dark:text-white ease-nav-brand">Agent Dashboard </span>
-        </a>
-      </div>
-
-      <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
-
-      <div class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
-        <ul class="flex flex-col pl-0 mb-0">
-          <li class="mt-0.5 w-full">
-            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80" href="../pages/dashboard.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Dashboard</span>
-            </a>
-          </li>
-
-          <li class="mt-0.5 w-full">
-            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80" href="../pages/tables.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Tables</span>
-            </a>
-          </li>
-
-          <li class="mt-0.5 w-full">
-            <a class="py-2.7 bg-blue-500/13 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors" href="../pages/billing.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-emerald-500 ni ni-credit-card"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Tickets</span>
-            </a>
-          </li>
-
-          <li class="mt-0.5 w-full">
-            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80" href="../pages/virtual-reality.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-app"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Log</span>
-            </a>
-          </li>
-
-          <li class="w-full mt-4">
-            <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Account pages</h6>
-          </li>
-
-          <li class="mt-0.5 w-full">
-            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80" href="../pages/profile.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-slate-700 ni ni-single-02"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Profile</span>
-            </a>
-          </li>
-
-          <li class="mt-0.5 w-full">
-            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80" href="../pages/sign-in.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-single-copy-04"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Sign Out</span>
-            </a>
-          </li>
-
-       
-        </ul>
-      </div>
-
-      
-    </aside>
-
-    <main class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
-      <!-- Navbar -->
-      <nav class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start" navbar-main navbar-scroll="false">
-        <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
-          <nav>
-            <!-- breadcrumb -->
-            <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
-              <li class="text-sm leading-normal">
-                <a class="text-white opacity-50" href="javascript:;">Pages</a>
-              </li>
-              <li class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']" aria-current="page">Billing</li>
-            </ol>
-            <h6 class="mb-0 font-bold text-white capitalize">Billing</h6>
-          </nav>
-
-          <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-            <div class="flex items-center md:ml-auto md:pr-4">
-              <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease">
-                <span class="text-sm ease leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
-                  <i class="fas fa-search"></i>
-                </span>
-                <input type="text" class="pl-9 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 dark:bg-slate-850 dark:text-white bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="Type here..." />
-              </div>
-            </div>
-            <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-              <!-- online builder btn  -->
-              <!-- <li class="flex items-center">
-                <a class="inline-block px-8 py-2 mb-0 mr-4 text-xs font-bold text-center text-blue-500 uppercase align-middle transition-all ease-in bg-transparent border border-blue-500 border-solid rounded-lg shadow-none cursor-pointer leading-pro hover:-translate-y-px active:shadow-xs hover:border-blue-500 active:bg-blue-500 active:hover:text-blue-500 hover:text-blue-500 tracking-tight-rem hover:bg-transparent hover:opacity-75 hover:shadow-none active:text-white active:hover:bg-transparent" target="_blank" href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053">Online Builder</a>
-              </li> -->
-              <li class="flex items-center">
-                <a href="../pages/sign-in.html" class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
-                  <i class="fa fa-user sm:mr-1"></i>
-                  <span class="hidden sm:inline">Sign In</span>
-                </a>
-              </li>
-              <li class="flex items-center pl-4 xl:hidden">
-                <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
-                  <div class="w-4.5 overflow-hidden">
-                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                    <i class="ease relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                  </div>
-                </a>
-              </li>
-              <li class="flex items-center px-4">
-                <a href="javascript:;" class="p-0 text-sm text-white transition-all ease-nav-brand">
-                  <i fixed-plugin-button-nav class="cursor-pointer fa fa-cog"></i>
-                  <!-- fixed-plugin-button-nav  -->
-                </a>
-              </li>
-
-              <!-- notifications -->
-
-              <li class="relative flex items-center pr-2">
-                <p class="hidden transform-dropdown-show"></p>
-                <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" dropdown-trigger aria-expanded="false">
-                  <i class="cursor-pointer fa fa-bell"></i>
-                </a>
-
-                <ul dropdown-menu class="text-sm transform-dropdown before:font-awesome before:leading-default before:duration-350 before:ease lg:shadow-3xl duration-250 min-w-44 before:sm:right-8 before:text-5.5 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg border-0 border-solid border-transparent dark:shadow-dark-xl dark:bg-slate-850 bg-white bg-clip-padding px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-50 before:inline-block before:font-normal before:text-white before:antialiased before:transition-all before:content-['\f0d8'] sm:-mr-6 lg:absolute lg:right-0 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                  <!-- add show class on dropdown open js -->
-                  <li class="relative mb-2">
-                    <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors" href="javascript:;">
-                      <div class="flex py-1">
-                        <div class="my-auto">
-                          <img src="../assets/img/team-2.jpg" class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl" />
-                        </div>
-                        <div class="flex flex-col justify-center">
-                          <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white"><span class="font-semibold">New message</span> from Laur</h6>
-                          <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
-                            <i class="mr-1 fa fa-clock"></i>
-                            13 minutes ago
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-
-                  <li class="relative mb-2">
-                    <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 transition-colors duration-300 hover:bg-gray-200 hover:text-slate-700" href="javascript:;">
-                      <div class="flex py-1">
-                        <div class="my-auto">
-                          <img src="../assets/img/small-logos/logo-spotify.svg" class="inline-flex items-center justify-center mr-4 text-sm text-white bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 h-9 w-9 max-w-none rounded-xl" />
-                        </div>
-                        <div class="flex flex-col justify-center">
-                          <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white"><span class="font-semibold">New album</span> by Travis Scott</h6>
-                          <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
-                            <i class="mr-1 fa fa-clock"></i>
-                            1 day
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-
-                  <li class="relative">
-                    <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 transition-colors duration-300 hover:bg-gray-200 hover:text-slate-700" href="javascript:;">
-                      <div class="flex py-1">
-                        <div class="inline-flex items-center justify-center my-auto mr-4 text-sm text-white transition-all duration-200 ease-nav-brand bg-gradient-to-tl from-slate-600 to-slate-300 h-9 w-9 rounded-xl">
-                          <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>credit-card</title>
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                              <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                <g transform="translate(1716.000000, 291.000000)">
-                                  <g transform="translate(453.000000, 454.000000)">
-                                    <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-                                    <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                  </g>
-                                </g>
-                              </g>
-                            </g>
-                          </svg>
-                        </div>
-                        <div class="flex flex-col justify-center">
-                          <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white">Payment successfully completed</h6>
-                          <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
-                            <i class="mr-1 fa fa-clock"></i>
-                            2 days
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Logo</a>
+        
         </div>
       </nav>
 
-      <div class="w-full px-6 py-6 mx-auto">
-        <!-- content -->
+      
+   
 
-        <div class="flex flex-wrap -mx-3">
-          <div class="max-w-full px-3 lg:w-2/3 lg:flex-none">
-            <div class="flex flex-wrap -mx-3">
-              <div class="w-full max-w-full px-3 mb-6 xl:mb-0 xl:w-1/2 xl:flex-none">
-                <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 border-transparent border-solid shadow-xl rounded-2xl bg-clip-border">
-                  <div class="relative overflow-hidden rounded-2xl" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/card-visa.jpg')">
-                    <span class="absolute top-0 left-0 w-full h-full bg-center bg-cover bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 opacity-80"></span>
-                    <div class="relative z-10 flex-auto p-4">
-                      <i class="p-2 text-white fas fa-wifi"></i>
-                      <h5 class="pb-2 mt-6 mb-12 text-white">45DF&nbsp;&nbsp;&nbsp;#DS2&nbsp;&nbsp;&nbsp;SD94&nbsp;&nbsp;&nbsp;7FS2</h5>
-                      <div class="flex">
-                        <div class="flex">
-                          <div class="mr-6">
-                            <p class="mb-0 text-sm leading-normal text-white opacity-80">Agent</p>
-                            <h6 class="mb-0 text-white">Jordan Peterson</h6>
-                          </div>
-                          <div>
-                            <p class="mb-0 text-sm leading-normal text-white opacity-80">Level</p>
-                            <h6 class="mb-0 text-white">0</h6>
-                          </div>
-                        </div>
+
+    <main >
+        <div class="row">
+            <div class="col-lg-2">
+                <nav class="nav px-2 block">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('agent.index') }}">
+                                <i class=""></i>
+                                <span class=""><h3>Dashboard</h3></span>
+                            </a>
+                        </li>
+            
+                        <li class="nav-item">
+                            <a class="nav-link" href="">
+                                <i class=""></i>
+                                <span class=""><h3>Tickets</h3></span>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class=""></i>
+                                <span class=""><h3>Ticket logs</h3></span>
+                            </a>
+                        </li>
                        
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="w-full max-w-full px-3 xl:w-1/2 xl:flex-none">
-                <div class="flex flex-wrap -mx-3">
-                  <div class="w-full max-w-full px-3 md:w-1/2 md:flex-none">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                      <div class="p-4 mx-6 mb-0 text-center border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                        <div class="w-16 h-16 text-center bg-center shadow-sm icon bg-gradient-to-tl from-blue-500 to-violet-500 rounded-xl">
-                          <i class="relative text-xl leading-none text-white opacity-100 fas fa-landmark top-31/100"></i>
-                        </div>
-                      </div>
-                      <div class="flex-auto p-4 pt-0 text-center">
-                        <h6 class="mb-0 text-center dark:text-white">Tickets</h6>
-                        <span class="text-xs leading-tight dark:text-white dark:opacity-80">Assigned</span>
-                        <hr class="h-px my-4 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
-                        <h5 class="mb-0 dark:text-white">32</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w-full max-w-full px-3 mt-6 md:mt-0 md:w-1/2 md:flex-none">
-                    <div class="relative flex flex-col min-w-0 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                      <div class="p-4 mx-6 mb-0 text-center border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                        <div class="w-16 h-16 text-center bg-center shadow-sm icon bg-gradient-to-tl from-blue-500 to-violet-500 rounded-xl">
-                          <i class="relative text-xl leading-none text-white opacity-100 fab fa-paypal top-31/100"></i>
-                        </div>
-                      </div>
-                      <div class="flex-auto p-4 pt-0 text-center">
-                        <h6 class="mb-0 text-center dark:text-white">Tickets</h6>
-                        <span class="text-xs leading-tight dark:text-white dark:opacity-80">Closed Today</span>
-                        <hr class="h-px my-4 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
-                        <h5 class="mb-0 dark:text-white">54</h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="max-w-full px-3 mb-6 lg:mb-0 lg:w-full lg:flex-none">
-                <div class="relative flex flex-col min-w-0 mt-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                  <div class="p-4 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                    <div class="flex flex-wrap -mx-3">
-                      <div class="flex items-center flex-none w-1/2 max-w-full px-3">
-                        <h6 class="mb-0 dark:text-white">Payment Method</h6>
-                      </div>
-                      <div class="flex-none w-1/2 max-w-full px-3 text-right">
-                        <a class="inline-block px-5 py-2.5 font-bold leading-normal text-center text-white align-middle transition-all bg-transparent rounded-lg cursor-pointer text-sm ease-in shadow-md bg-150 bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 hover:shadow-xs active:opacity-85 hover:-translate-y-px tracking-tight-rem bg-x-25" href="javascript:;"> <i class="fas fa-plus" aria-hidden="true"> </i>&nbsp;&nbsp;Email user</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex-auto p-4">
-                    <div class="flex flex-wrap -mx-3">
-                      <div class="max-w-full px-3 mb-6 md:mb-0 md:w-1/2 md:flex-none">
-                        <div class="relative flex flex-row items-center flex-auto min-w-0 p-6 break-words bg-transparent border border-solid shadow-none md-max:overflow-auto rounded-xl border-slate-100 dark:border-slate-700 bg-clip-border">
-                          <img class="mb-0 mr-4 w-1/10" alt="logo">
-                          <h6 class="mb-0 dark:text-white">Create a ticket</h6>
-                          <i class="ml-auto cursor-pointer fas fa-pencil-alt text-slate-700" data-target="tooltip_trigger" data-placement="top" aria-hidden="true"></i>
-                          <div data-target="tooltip" class="hidden px-2 py-1 text-sm text-white bg-black rounded-lg">
-                            Edit Card
-                            <div class="invisible absolute h-2 w-2 bg-inherit before:visible before:absolute before:h-2 before:w-2 before:rotate-45 before:bg-inherit before:content-['']" data-popper-arrow=""></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="max-w-full px-3 md:w-1/2 md:flex-none">
-                        <div class="relative flex flex-row items-center flex-auto min-w-0 p-6 break-words bg-transparent border border-solid shadow-none md-max:overflow-auto rounded-xl border-slate-100 dark:border-slate-700 bg-clip-border">
-                          <img class="mb-0 mr-4 w-1/10" src="../assets/img/logos/visa.png" alt="logo">
-                          <h6 class="mb-0 dark:text-white">5248</h6>
-                          <i class="ml-auto cursor-pointer fas fa-pencil-alt text-slate-700" data-target="tooltip_trigger" data-placement="top" aria-hidden="true"></i>
-                          <div data-target="tooltip" class="hidden px-2 py-1 text-sm text-white bg-black rounded-lg">
-                            Edit Card
-                            <div class="invisible absolute h-2 w-2 bg-inherit before:visible before:absolute before:h-2 before:w-2 before:rotate-45 before:bg-inherit before:content-['']" data-popper-arrow=""></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            <h3>{{ __('Logout') }}</h3>
+                            </a>
+            
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>               
+                        </li>
+            
+                       
+                       
+                    </ul>
+                </nav>
             </div>
-        </div>
-          <div class="w-full max-w-full px-3 lg:w-1/3 lg:flex-none">
-            <div class="relative flex flex-col h-full min-w-0 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-              <div class="p-4 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                <div class="flex flex-wrap -mx-3">
-                  <div class="flex items-center flex-none w-1/2 max-w-full px-3">
-                    <h6 class="mb-0 dark:text-white">Tickets</h6>
-                  </div>
-                  <div class="flex-none w-1/2 max-w-full px-3 text-right">
-                    <button class="inline-block px-8 py-2 mb-0 text-xs font-bold leading-normal text-center text-blue-500 align-middle transition-all ease-in bg-transparent border border-blue-500 border-solid rounded-lg shadow-none cursor-pointer bg-150 active:opacity-85 hover:-translate-y-px tracking-tight-rem bg-x-25 hover:opacity-75">View All</button>
-                  </div>
-                </div>
-              </div>
-              <div class="flex-auto p-4 pb-0">
-                <ul class="flex flex-col pl-0 mb-0 rounded-lg">
-                  <li class="relative flex justify-between px-4 py-2 pl-0 mb-2 border-0 rounded-t-inherit text-inherit rounded-xl">
-                    <div class="flex flex-col">
-                      <h6 class="mb-1 text-sm font-semibold leading-normal dark:text-white text-slate-700">March, 01, 2020</h6>
-                      <span class="text-xs leading-tight dark:text-white dark:opacity-80">#MS-415646</span>
-                    </div>
-                    <div class="flex items-center text-sm leading-normal dark:text-white/80">
-                      $180
-                      <button class="dark:text-white inline-block px-0 py-2.5 mb-0 ml-6 font-bold leading-normal text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer ease-in bg-150 text-sm active:opacity-85 hover:-translate-y-px tracking-tight-rem bg-x-25 text-slate-700"><i class="mr-1 text-lg leading-none fas fa-file-pdf"></i> PDF</button>
-                    </div>
-                  </li>  
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="flex flex-wrap -mx-3">
-          <div class="w-full max-w-full px-3 mt-6 md:w-7/12 md:flex-none">
-            <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-              <div class="p-6 px-4 pb-0 mb-0 border-b-0 rounded-t-2xl">
-                <h6 class="mb-0 dark:text-white">Tickets</h6> <!-- All tickets recent top, well use filter to find specific -->
-              </div>
-              <div class="flex-auto p-4 pt-6">
-                <ul class="flex flex-col pl-0 mb-0 rounded-lg">
-                  @foreach ($tickets as $ticket)             
-                  <li class="relative flex p-6 mb-2 border-0 rounded-t-inherit rounded-xl bg-gray-50 dark:bg-slate-850">
-                    <div class="flex flex-col">
-                      <h6 class="mb-4 text-sm leading-normal dark:text-white">{{ $ticket->title }} {{ $ticket->name}}</h6>
-                      <span class="mb-2 text-xs leading-tight dark:text-white/80">Ticket ID : <span class="font-semibold text-slate-700 dark:text-white sm:ml-2">{{ $ticket->ticket_id }}</span></span>
-                      <span class="mb-2 text-xs leading-tight dark:text-white/80">Email Address: <span class="font-semibold text-slate-700 dark:text-white sm:ml-2">oliver@burrito.com</span></span>
-                      <span class="text-xs leading-tight dark:text-white/80">Descripton: <span class="font-semibold text-slate-700 dark:text-white sm:ml-2">{{ $ticket->description }}</span></span>
-                      <span class="text-xs leading-tight dark:text-white/80">Label: <span class="font-semibold text-slate-700 dark:text-white sm:ml-2">{{ $ticket->label }}</span></span>
-                      <span class="text-xs leading-tight dark:text-white/80">Category: <span class="font-semibold text-slate-700 dark:text-white sm:ml-2">{{ $ticket->categories }}</span></span>
-                      <span class="text-xs leading-tight dark:text-white/80">Priority: <span class="font-semibold text-slate-700 dark:text-white sm:ml-2">{{ $ticket->priority }}</span></span>
-                    </div>
-                    <div class="ml-auto text-right">
-                      <a class="relative z-10 inline-block px-4 py-2.5 mb-0 font-bold text-center text-transparent align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 bg-gradient-to-tl from-red-600 to-orange-600 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text" href="javascript:;"><i class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-orange-600 bg-x-25 bg-clip-text"></i>Comment</a>
-                      <a class="inline-block dark:text-white px-4 py-2.5 mb-0 font-bold text-center align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal text-sm ease-in bg-150 hover:-translate-y-px active:opacity-85 bg-x-25 text-slate-700" href="/agent/{{ $ticket->ticket_id }}/edit"><i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Edit</a>
-                    </div>
-                  </li>
-                  @endforeach
-                  <!-- Paginate -->
-                </ul>
-              </div>
+            <div class="col">
+                <h4>Ticket 6</h4>
             </div>
-          </div>
-          <div class="w-full max-w-full px-3 mt-6 md:w-5/12 md:flex-none">
-            <div class="relative flex flex-col h-full min-w-0 mb-6 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-              <div class="p-6 px-4 pb-0 mb-0 border-b-0 rounded-t-2xl">
-                <div class="flex flex-wrap -mx-3">
-                  <div class="max-w-full px-3 md:w-1/2 md:flex-none">
-                    <h6 class="mb-0 dark:text-white">Notes</h6>
-                  </div>
-                  <div class="flex items-center justify-end max-w-full px-3 dark:text-white/80 md:w-1/2 md:flex-none">
-                    <i class="mr-2 far fa-calendar-alt"></i>
-                    <small>23 - 30 March 2020</small>
-                  </div>
-                </div>
-              </div>
-              <!--Agent will write their notes here but they will be deleted tomorrow -->
-              <div class="flex-auto p-4 pt-6">
-                <h6 class="mb-4 text-xs font-bold leading-tight uppercase dark:text-white text-slate-500">Newest</h6>
-                <ul class="flex flex-col pl-0 mb-0 rounded-lg">
-                  <li class="relative flex justify-between px-4 py-2 pl-0 mb-2 border-0 rounded-t-inherit text-inherit rounded-xl">
-                    <div class="flex items-center">
-                      <div class="flex flex-col">
-                        <h6 class="mb-1 text-sm leading-normal dark:text-white text-slate-700">Note</h6>
-                        {{-- <span class="text-xs leading-tight dark:text-white/80">27 March 2020, at 12:30 PM</span>  --}}
-                        <textarea name="" id="" cols="30" rows="3"></textarea>
-                      </div>
-                    </div>
-                    <div class="flex flex-col items-center justify-center">
-                      <p class="relative z-10 inline-block m-0 text-sm font-semibold leading-normal text-transparent bg-gradient-to-tl from-red-600 to-orange-600 bg-clip-text">- $ 2,500</p>
-                    </div>
-                  </li>        
-                </ul>
-               
-              </div>
-            </div>
-          </div>
-        </div>
+            
 
-        <footer class="pt-4">
-          <div class="w-full px-6 mx-auto">
-            <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
-              <div class="w-full max-w-full px-3 mt-0 mb-6 shrink-0 lg:mb-0 lg:w-1/2 lg:flex-none">
-                <div class="text-sm leading-normal text-center text-slate-500 lg:text-left">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear() + ",");
-                  </script>
-                  made with <i class="fa fa-heart"></i> by
-                  <a href="https://www.creative-tim.com" class="font-semibold dark:text-white text-slate-700" target="_blank">Creative Tim</a>
-                  for a better web.
-                </div>
-              </div>
-              <div class="w-full max-w-full px-3 mt-0 shrink-0 lg:w-1/2 lg:flex-none">
-                <ul class="flex flex-wrap justify-center pl-0 mb-0 list-none lg:justify-end">
-                  <li class="nav-item">
-                    <a href="https://www.creative-tim.com" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">Creative Tim</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="https://www.creative-tim.com/presentation" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">About Us</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="https://creative-tim.com/blog" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">Blog</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="https://www.creative-tim.com/license" class="block px-4 pt-0 pb-1 pr-0 text-sm font-normal transition-colors ease-in-out text-slate-500" target="_blank">License</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            
           </div>
-        </footer>
-      </div>
     </main>
-  </body>
-  <!-- plugin for scrollbar  -->
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js" async></script>
-  <!-- main script file  -->
-  <script src="../assets/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
+</body>
 </html>

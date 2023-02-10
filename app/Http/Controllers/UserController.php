@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ticket;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
+
 
 class UserController extends Controller
 {
+
+    use HasRoles;
     /**
      * Display a listing of the resource.
      *
@@ -13,6 +21,9 @@ class UserController extends Controller
      */
     public function index()
     {
+
+       $user_ticket = Ticket::where('user_id',Auth::id());
+       return view('user.index')->with('tickets',$user_ticket);
     }
 
     /**
@@ -22,6 +33,7 @@ class UserController extends Controller
      */
     public function create()
     {
+
         return view('user.create');
 
     }
@@ -34,19 +46,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        // 1. Customer create a ticket
-        $customer = Ticket::create([ //customer ticket
-            'customer_email' => Auth::user()->email,
-            //generate a uniq id as reference also
-            'title' => $request->input('title'),
+        
+        $customer = Ticket::create([ 
+            
+            'ticket_id' =>  Str::uuid(),
+            'user_id' => Auth::id(),
+            'name' => auth()->user()->name,
+            'title' => auth()->user()->title,
             'description' => $request->input('description'),
             'priority' => $request->input('priority'),
             'label' => implode(',', (array) $request->input('label')),
             'categories' => implode(',', (array) $request->input('categories')),
         ]);
+
+        Log::create([
+            'message' => 'User created a new ticket' . 'current time',
+        ]);
+        
+        return redirect()->back();
     }
 
+    public function tickets()
+    {
+    
+    }
     /**
      * Display the specified resource.
      *

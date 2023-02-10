@@ -1,16 +1,29 @@
-/** @type {import('tailwindcss').Config} */
+// /** @type {import('tailwindcss').Config} */
+// module.exports = {
+//   content: [
+//     "./resources/**/*.blade.php",
+//     "./resources/**/*.js",
+//     "./resources/**/*.vue",
+//     "./node_modules/flowbite/**/*.js"
+//   ],
+// theme: {
+//     extend: {},
+//   },
+//   plugins: [
+//       require('flowbite/plugin'),
+//       require('@tailwind/forms')
+//   ],
+// }
+/** 
+@type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
     "./resources/**/*.vue",
-    "./node_modules/flowbite/**/*.js"
   ],
-theme: {
+  theme: {
     extend: {},
   },
-  plugins: [
-      require('flowbite/plugin'),
-      require('@tailwind/forms')
-  ],
+  plugins: [],
 }

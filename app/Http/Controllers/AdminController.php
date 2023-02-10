@@ -17,6 +17,7 @@ class AdminController extends Controller
     public function __construct()
     {
         //include the middlewares
+        $this->middleware('auth');
     }
 
 
@@ -24,10 +25,14 @@ class AdminController extends Controller
     {
         // $tickets_count = Ticket::all()->count();
         $tickets = Ticket::all();
-        
+        $users = User::role('user')->get();
+        $agent = User::role('agent')->get();
+        $agent = User::role('admin')->get();
+
         return view('admin.index')->with([
             'tickets' => $tickets,
-
+            'users' => $users,
+            'agents' => $agent
         
         ]);
         
@@ -44,7 +49,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+ * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -53,7 +58,7 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        //
+        // Register user
     }
 
     /**
@@ -65,8 +70,8 @@ class AdminController extends Controller
     public function show($id)
     {
         $ticket = Ticket::find($id);
-        // dd($ticket);
 
+        // To find specifics about the ticket
         return view('admin.show')->with('ticket',$ticket);
     }
 
@@ -96,16 +101,16 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
        
         $request->validate([
             'agent' => 'required',
         ]);
 
-        $agent_name = User::where('id',$request->input('agent'))->value('name');
+        $agent_id = User::where('id',$request->input('agent'))->value('id');
 
-        $ticket_update = Ticket::where('id',$id)
-        ->update(['agent' => $agent_name]);
+        $ticket_update = Ticket::where('ticket_id',$id)
+        ->update(['agent_id' => $agent_id]);
 
         return redirect()->back();
     }

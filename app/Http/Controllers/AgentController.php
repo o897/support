@@ -51,7 +51,11 @@ class AgentController extends Controller
      */
     public function show($id)
     {
-        
+        // View the ticket with all its contents files, status comments etc
+
+        Ticket::find($id);
+
+        return view('agent.show');
     }
 
     /**
@@ -62,22 +66,15 @@ class AgentController extends Controller
      */
     public function edit(Request $request,$id)
     {
-        // method to update the DB
-    //    dd($request->all());
-
-       //
+      
+       //Agent click the ticket to be edited then boom it shows up for him to update with a comment or a status
        $ticket = Ticket::find($id);
-       // dd($ticket);
+       
        return view('agent.edit')->with([
            'ticket' => $ticket,
        ]);
     }
     
-    public function updateTicketStatus($id, Request $request)
-    {
-       
-    }
-
 
     /**
      * Update the specified resource in storage.
@@ -89,13 +86,22 @@ class AgentController extends Controller
     public function update(Request $request, $id)
     {
         //
-        // dd($request->all());
         $validatedData = $request->validate([
+
+            'comment' => 'string',
             'status' => 'required|string', //|in:open,closed,pending'
+            
         ]);
 
         Ticket::where('ticket_id', $id)->update(['status' => $validatedData['status']]);
+
+        Log::create([
+            'message' => 'Agent :' . auth()->users()->name . 'just updated a user ticket to' . $request->status    
+        ]);
+
         return redirect()->back();
+
+
     }
 
     /**

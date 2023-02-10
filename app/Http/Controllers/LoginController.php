@@ -12,7 +12,7 @@ class LoginController extends Controller
 
     public function loginForm()
     {
-        return view('sign-in');
+        return view('login');
     }
 
     public function authenticate(Request $request)
@@ -26,14 +26,25 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials)) {
             // Admin role: 2 , Agent role: 1 , User role: 0
-            if (auth()->user()->role == '2') 
+            if (auth()->user()->hasRole('admin')) 
             {
-            //   dd("Login successful");
               $request->session()->regenerate();
               return redirect()->route('admin.index');
+
+            } elseif (auth()->user()->hasRole('agent')) {
+
+              $request->session()->regenerate();
+              return redirect()->route('agent.index');
+
+            } elseif (auth()->user()->hasRole('user')) {
+
+                $request->session()->regenerate();
+                return redirect()->route('user.index');
+
             }
 
         }
+        
         dd("Wrong password");
 
 

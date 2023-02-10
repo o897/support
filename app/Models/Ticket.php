@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+
+
 
 class Ticket extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
+    
 
-    protected $fillable = ['customer_email','title', 'description','label','categories','priority'];
+    protected $fillable = ['name', 'status' ,'ticket_id','user_id','title', 'description','label','categories','priority'];
 
     //
     public $incrementing = false; 
@@ -17,8 +21,8 @@ class Ticket extends Model
     protected $primaryKey = 'ticket_id';
     
 
-    // public function users()
-    // {
-    //     return $this->belongsTo(User::class,'useri');
-    // }
+    public function users()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
 }
