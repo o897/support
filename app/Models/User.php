@@ -26,6 +26,7 @@ class User extends Authenticatable
         'email',
         'role',
         'password',
+        'location',
     ];
 
     /**
@@ -48,9 +49,8 @@ class User extends Authenticatable
     ];
 
 
-
-    public function tickets() {
-        // This user has many tickets
-        return $this->hasMany(Ticket::class,'user_id');
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class,'user_id','id');
     }
 }

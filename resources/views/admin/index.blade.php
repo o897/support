@@ -71,7 +71,7 @@
               <div class="card card-light-blue">
                 <div class="card-body">
                   <p class="mb-4">Unassigned tickets</p>
-                  <p class="fs-30 mb-2">{{ \App\Models\Ticket::where(['agent_id' => ''])->count() }}
+                  <p class="fs-30 mb-2">{{ \App\Models\Ticket::where(['agent_id' => null ])->count() }}
                   </p>
                   <p>2.00% (30 days)</p>
                 </div>
@@ -81,7 +81,7 @@
               <div class="card card-light-danger">
                 <div class="card-body">
                   <p class="mb-4">Unreseolved tickets</p><!-- Resolved-->
-                  <p class="fs-30 mb-2">{{ \App\Models\Ticket::where(['status' => ''])->orWhere(['status' => 'open'])->count() }}</p>
+                  <p class="fs-30 mb-2">{{ \App\Models\Ticket::where(['status' => null])->orWhere(['status' => 'open'])->count() }}</p>
                   <p>0.22% (30 days)</p>
                 </div>
               </div>
@@ -109,10 +109,10 @@
                   <tbody>
                     @forelse ($agents as $agent)
                     <tr>
-                      <td><a href="">{{ $agent->name }}</a></td>
-                      <td class="font-weight-bold">433232</td>
-                      <td>cdss</td>
-                      <td class="font-weight-medium"><div class="badge badge-success">dsdsdss</div></td>
+                      <td><a href="/agent/{{ $agent->id }}">{{ $agent->name }}</a></td>
+                      <td class="font-weight-bold">{{ App\Models\Ticket::where('agent_id',$agent->id)->count() }}</td>
+                      <td><div class="badge badge-success">{{ App\Models\Ticket::where('agent_id',$agent->id)->where('status','closed')->count()}}</div></td>
+                      <td class="font-weight-medium"><div class="badge badge-success">yesterday</div></td>
                     </tr>  
                     @empty
                         <p class="text-center">Not tickets yet.</p>
@@ -130,21 +130,31 @@
               <h4 class="card-title">To Do Lists</h4>
               <div class="list-wrapper pt-2">
                 <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+                  @forelse ($tasks as $task)
                   <li>
                     <div class="form-check form-check-flat">
                       <label class="form-check-label">
                         <input class="checkbox" type="checkbox">
-                        Meeting with Urban Team
+                        {{ $task->content }}
                       </label>
                     </div>
-                    <i class="remove ti-close"></i>
-                  </li>
-                
+                    <form action="/task/{{ $task->id }}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <button class="ti-close btn btn-icon"></button>
+                    </form> 
+                  </li>  
+                  @empty
+                  @endforelse
                 </ul>
-                <div class="add-items d-flex mb-0 mt-2">
-                  <input type="text" class="form-control todo-list-input"  placeholder="Add new task">
-                  <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
-                </div>
+                <form action="/task" method="post">
+                  @csrf
+                  <div class="add-items d-flex mb-0 mt-2">
+                    <input type="text" name="content" class="form-control todo-list-input"  placeholder="Add new task">
+                    <button class="add btn btn-icon text-primary bg-transparent"><i class="icon-circle-plus"></i></button>
+                  </div>
+                </form>
+                 
               </div>
              
             </div>
@@ -155,24 +165,25 @@
         <div class="col-md-4 stretch-card grid-margin">
           <div class="card">
             <div class="card-body">
-              <p class="card-title mb-0">Clients</p>
+              <p class="card-title mb-0">Tickets</p>
               <div class="table-responsive">
                 <table class="table table-borderless">
                   <thead>
                     <tr>
                       <th class="pl-0  pb-2 border-bottom">Places</th>
-                      <th class="border-bottom pb-2">Orders</th>
-                      <th class="border-bottom pb-2">Users</th>
+                      <th class="border-bottom pb-2">Number of tickets</th>
+                      <th class="border-bottom pb-2">Number of users</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="pl-0 pb-0">cscsd</td>
-                      <td class="pb-0"><p class="mb-0"><span class="font-weight-bold mr-2">Odi</span>(1.32%)</p></td>
-                      <td class="pb-0">14</td>
-                    </tr> 
-                        
-                    
+                  @foreach ($clients as $client)
+                  <tr>
+                    <td class="pl-0 pb-0">{{ $client->location }}</td>
+                    <td class="pb-0"><p class="mb-0"><span class="font-weight-bold mr-2">{{ $client->ticket_count  }}</span></p></td>
+                    <td class="pb-0">{{ \App\Models\User::where('location',$client->location)->count() }}</td>
+                  </tr>  
+                  @endforeach
+                                                                     
                   </tbody>
                 </table>
               </div>
@@ -186,42 +197,22 @@
                 <div class="card-body">
                   <p class="card-title">Agent performance</p><!-- Meausure who closes mot tickets -->
                   <div class="charts-data">
+                    
+                    @forelse ($agents as $agent)
                     <div class="mt-3">
-                      <p class="mb-0">Mathambi Mosawino</p>
+                      <p class="mb-0">{{ $agent->name }}</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="progress progress-md flex-grow-1 mr-4">
-                          <div class="progress-bar bg-inf0" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress-bar bg-info" role="progressbar" style="width: {{ $agent->tickets->where('status','closed')->count() }}%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <p class="mb-0">5k</p>
+                        <p class="mb-0 pb-3">{{ $agent->tickets->where('status','closed')->count() }}</p>
                       </div>
-                    </div>
-                    <div class="mt-3">
-                      <p class="mb-0">James Bond</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="progress progress-md flex-grow-1 mr-4">
-                          <div class="progress-bar bg-info" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="mb-0">32</p>
-                      </div>
-                    </div>
-                    <div class="mt-3">
-                      <p class="mb-0">IBM Agent</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="progress progress-md flex-grow-1 mr-4">
-                          <div class="progress-bar bg-info" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="mb-0">232</p>
-                      </div>
-                    </div>
-                    <div class="mt-3">
-                      <p class="mb-0"></p>Unix Agent
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="progress progress-md flex-grow-1 mr-4">
-                          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="mb-0">67</p>
-                      </div>
-                    </div>
+                    </div> 
+                    @empty
+                        
+                    @endforelse
+                    
+                  
                   </div>  
                 </div>
               </div>
@@ -229,11 +220,11 @@
             <div class="col-md-12 stretch-card grid-margin grid-margin-md-0">
               <div class="card data-icon-card-primary">
                 <div class="card-body">
-                  <p class="card-title text-white">Number tickets</p>                      
+                  <p class="card-title text-white">February tickets </p>                      
                   <div class="row">
                     <div class="col-8 text-white">
-                      <h3>34040</h3>
-                      <p class="text-white font-weight-500 mb-0">The total number of sessions within the date range.It is calculated as the sum . </p>
+                      <h3>654</h3>
+                      <p class="text-white font-weight-500 mb-0">43 more than the previous month</p>
                     </div>
                     <div class="col-4 background-icon">
                     </div>
@@ -250,13 +241,15 @@
               <ul class="icon-data-list">
                
                 <li>
-                  <div class="d-flex">
-                    <img src="images/faces/face4.jpg" alt="user">
+                  <div class="">
+                    @forelse ($logs as $log)
                     <div>
-                      <p class="text-info mb-1">George Morrison</p>
-                      <p class="mb-0">Sales dashboard have been created</p>
-                      <small>8:50 am</small>
-                    </div>
+                      <p class="text-info mb-1">{{$log->message}}</p>
+                    </div>   
+                    @empty
+                        
+                    @endforelse
+                    
                   </div>
                 </li>
               </ul>
@@ -276,7 +269,6 @@
                       <thead>
                         <tr>
                           <th class="">Ticket Id#</th>
-                          <th>User Id</th>
                           <th>Agent Id</th>
                           <th>Category</th>
                           <th>Label</th>
@@ -293,23 +285,18 @@
                           @method('PUT')
                           <tr class="odd selected">
                             <td class=" select-checkbox"><a href="">{{ $ticket->ticket_id }}</a></td>
-                            <td class="sorting_1">{{ $ticket->user_id }}</td>
                             <td>
-                              
-                              @forelse ($agents as $agent)
-                              <select class="form-control" name="agent">
-                                <option value="{{ $agent->id }}">{{ $agent->id }}--{{ $agent->name }}</option>
-                              </select>
-                              @empty
-                                  No agents in the DB
-                              @endforelse
-                             
+                              <select class="form-select form-select-sm" name="agent">
+                                @foreach ($agents as $agent)
+                                <option value="{{ $agent->id }}">#{{ $agent->id }}_{{ $agent->name }}</option>
+                                @endforeach
+                              </select>                            
                             </td>
                             <td>{{ $ticket->categories }}</td>
                             <td>{{ $ticket->label}}</td>
                             <td>{{ $ticket->status }}</td>
                             <td>{{ $ticket->created_at }}</td>
-                            <td><button>Assign</button></td>
+                            <td><button type="submit" class="btn btn-link">Assign</button></td>
                           </tr>
                         </form>                             
                         @empty
@@ -326,16 +313,5 @@
         </div>
     </div>
     <!-- content-wrapper ends -->
-    <!-- partial:partials/_footer.html -->
-    <footer class="footer">
-      <div class="d-sm-flex justify-content-center justify-content-sm-between">
-        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-      </div>
-      <div class="d-sm-flex justify-content-center justify-content-sm-between">
-        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span> 
-      </div>
-    </footer> 
-    <!-- partial -->
   </div>
 </x-layout>

@@ -21,31 +21,19 @@ class RegisterController extends Controller
     
         public function register(Request $request)
         {
-            ddd($request->all());
             // Get the role you want to assign
-            $role = Role::where('name', '=', $request->role)->first();
-
-            
+            $role = Role::where('name','user')->first();
+        
              $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'role' => $request->role, // If role no defined role is user
                 'location' => $request->location,
                 'password' => Hash::make($request->password),
-            ])->assignRole($role);
+             ]);
+
+             $user->assignRole($role);
     
-            if(auth()->user()->hasRole('admin')) {
-                return redirect()->back();
-            }
-            // Assign role to user
-            // $user->assignRole($role);
 
-            Log::create([
-                
-                'message' => 'New user current time'
-
-            ]);
-
-            return redirect()->route('user.index');
+            return redirect()->route('login.form');
     }
 }

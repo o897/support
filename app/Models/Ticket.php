@@ -11,18 +11,16 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 class Ticket extends Model
 {
     use HasFactory, HasUuids;
+
+    protected $fillable = ['ticket_id','user_id','name', 'file', 'status' ,'title', 'content','label','categories','priority'];
     
-
-    protected $fillable = ['name', 'status' ,'ticket_id','user_id','title', 'description','label','categories','priority'];
-
-    //
     public $incrementing = false; 
 
     protected $primaryKey = 'ticket_id';
     
-
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class,'user_id');
+
     }
 }

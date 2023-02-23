@@ -13,6 +13,7 @@
             Categories: {{ $ticket->categories }}<br>
             Updated at: {{ $ticket->updated_at }}<br>
            <span>{{$ticket->content}}</span> <br>
+
           </p>
            
           <a href="/replies/{{ $ticket->ticket_id }}" class="btn btn-primary">View Comments</a>

@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Log extends Model
+class Task extends Model
 {
     use HasFactory;
-    protected $fillable = ['message','user'];
+
+    protected $fillable = ['id','user_id','content'];
+
 }

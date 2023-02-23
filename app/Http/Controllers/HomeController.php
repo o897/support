@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reply;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -10,11 +13,7 @@ class HomeController extends Controller
      * Create a new controller instance.
      *
      * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    */
 
     /**
      * Show the application dashboard.
@@ -23,6 +22,45 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $comments = Ticket::all();
+
+        // dd($comments);
+
+        return view('comments')->with([
+            'comments' => $comments
+        ]);
+    }
+
+    public function replies($id)
+    {
+        
+        $comment = Ticket::where('ticket_id',$id)->get();
+        
+        $replies = Reply::all()->where('post_id',$id);
+
+        return view('replies')->with([
+            'replies' => $replies,
+            'comment' => $comment
+        
+        ]);
+    }
+
+    public function store(Request $request,$id)
+    {
+
+        Reply::create([
+            'user_id' => Auth::id(),
+            'post_id' => $id,
+            'content' => $request->content,
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function destroy($id)
+    {
+        Reply::find($id)->delete();
+
+        return redirect()->back();
     }
 }

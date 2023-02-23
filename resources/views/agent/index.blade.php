@@ -1,75 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-</head>
-<body>
-    
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Logo</a>
-        
+<x-app>
+
+  <div class="px-4 p-md-5">
+  
+{{-- 
+    <div class="card col-lg-2 col-sm-12">
+      <div class="card-body d-flex">
+        <div class="col-md-4">
+          <div class="mr-3">
+            <a href="/agent/create">
+              <i class="fas fa-check-circle fa-4x"></i>
+            </a>
+          </div>  
         </div>
-      </nav>
-
+        <div class="col px-2">
+          <h5 class="font-weight-bold" >Total tickets</h5>
+          <h6>{{ $tickets->count() }}</h6>
+        </div>
+      </div>
+    </div> --}}
       
-   
+      <h1>Tickets</h1>
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Ticket id</th><!-- Show-->
+              <th>Priority</th>
+              <th>Categories</th>
+              <th>Labels</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+      
+              @forelse ($tickets as $ticket)
+              <tr>
+                <td><a class="text-decoration-none" href="/agent/{{ $ticket->ticket_id }}">{{ $ticket->ticket_id }}</a></td>
+                  <td class="text-{{ $ticket->priority == 'high' ? 'danger' : 'secondary' }}" style="font-weight: bold">{{ $ticket->priority }}</td>
+                  <td>{{ $ticket->categories }}</td>
+                  <td>{{ $ticket->label}}</td>
+                  <td>{{ $ticket->status ? $ticket->status : 'Not updated yet'}}</td>
+                  <td><a class="text-decoration-none" href="/agent/{{  $ticket->ticket_id }}/edit">Edit</a></td>
 
-
-    <main >
-        <div class="row">
-            <div class="col-lg-2">
-                <nav class="nav px-2 block">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('agent.index') }}">
-                                <i class=""></i>
-                                <span class=""><h3>Dashboard</h3></span>
-                            </a>
-                        </li>
-            
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class=""></i>
-                                <span class=""><h3>Tickets</h3></span>
-                            </a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class=""></i>
-                                <span class=""><h3>Ticket logs</h3></span>
-                            </a>
-                        </li>
-                       
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                            <h3>{{ __('Logout') }}</h3>
-                            </a>
-            
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>               
-                        </li>
-            
-                       
-                       
-                    </ul>
-                </nav>
-            </div>
-
-            <div class="col">
-                <h4>Ticket 6</h4>
-            </div>
-            
-
-            
-          </div>
-    </main>
-</body>
-</html>
+              </tr>   
+              @empty
+              @endforelse
+              
+          
+          </tbody>
+        </table>  
+      
+      
+    
+    
+  </div>
+</x-app>

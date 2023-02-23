@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
+use App\Models\User;
 use App\Models\Ticket;
+use App\Models\Comment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -13,7 +16,14 @@ use Spatie\Permission\Traits\HasRoles;
 class UserController extends Controller
 {
 
-    use HasRoles;
+
+    use HasRoles;  
+    
+    public function __construct() 
+    {
+        $this->middleware(['role:user']);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,9 +31,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        
+    //    $tickets = Ticket::where('user_id',Auth::id())->get();
+    $tickets = Auth::user()->tickets()->get();
 
-       $user_ticket = Ticket::where('user_id',Auth::id());
-       return view('user.index')->with('tickets',$user_ticket);
+    return view('user.index')->with('tickets',$tickets);
     }
 
     /**
@@ -33,9 +45,7 @@ class UserController extends Controller
      */
     public function create()
     {
-
         return view('user.create');
-
     }
 
     /**
@@ -46,30 +56,38 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $customer = Ticket::create([ 
-            
-            'ticket_id' =>  Str::uuid(),
+    //  $amazon_s3 = Storage::disk('s3')->put('user_files/' . Auth::id, $request->file);
+        $uuid = Str::uuid();
+        // Everytime user store a new ticket user ticket will also be store in the  comments table
+        $customer = ([ 
+            'ticket_id' =>  $uuid,
+            'post_id' => $uuid,
             'user_id' => Auth::id(),
             'name' => auth()->user()->name,
-            'title' => auth()->user()->title,
-            'description' => $request->input('description'),
+            // 'file' => $amazon_s3,
+            'title' => $request->title,
+            'content' => $request->input('content'),
             'priority' => $request->input('priority'),
             'label' => implode(',', (array) $request->input('label')),
             'categories' => implode(',', (array) $request->input('categories')),
         ]);
 
-        Log::create([
-            'message' => 'User created a new ticket' . 'current time',
-        ]);
         
+        Ticket::create($customer);
+
+        Comment::create($customer);
+
+        Log::create([
+            'user' => auth()->user()->getRoleNames(),
+            'message' => 'Created a new ticket with a' . $request->priority . 'priority.',
+        ]);
+
+        // Email the admin the ticket info
+
         return redirect()->back();
     }
 
-    public function tickets()
-    {
-    
-    }
+
     /**
      * Display the specified resource.
      *
@@ -78,7 +96,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $ticket = Ticket::find($id);
+       
+        return view('user.show')->with([
+            'ticket' => $ticket,
+        ]);
     }
 
     /**
@@ -89,7 +111,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('user.edit')->with('user',$user);
     }
 
     /**
@@ -101,7 +125,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        User::update([
+            'name' => $request->name,
+            'location' => $request->location,
+            'password' => Hash::make($request->password)
+            
+        ]);
+
+
     }
 
     /**

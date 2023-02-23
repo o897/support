@@ -28621,8 +28621,9 @@ div.tagsinput span.tag a {
   margin-top: .2rem;
 }
 
+/* Changed line 28625 */
 .sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link, .sidebar .nav:not(.sub-menu) > .nav-item:hover[aria-expanded="true"] {
-  background: #4B49AC;
+  background: #6C7383;
   color: #fff;
 }
 

@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
+use App\Models\Reply;
 use App\Models\Ticket;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AgentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['role:agent']);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,7 @@ class AgentController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::all();
+        $tickets = Ticket::all()->where('agent_id',Auth::id());
 
         return view('agent.index')->with([
             'tickets' => $tickets,
@@ -28,8 +38,11 @@ class AgentController extends Controller
      */
     public function create()
     {
-        //
-        return view('agent.create');
+       $tickets = Ticket::all()->where('agent_id',Auth::id());
+
+        return view('agent.create')->with([
+            'tickets' => $tickets,
+        ]);
     }
 
     /**
@@ -53,9 +66,11 @@ class AgentController extends Controller
     {
         // View the ticket with all its contents files, status comments etc
 
-        Ticket::find($id);
-
-        return view('agent.show');
+        $ticket = Ticket::find($id);
+       
+       return view('agent.show')->with([
+           'ticket' => $ticket,
+       ]);
     }
 
     /**
@@ -85,18 +100,25 @@ class AgentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $validatedData = $request->validate([
-
-            'comment' => 'string',
+        $agent_update = $request->validate([
             'status' => 'required|string', //|in:open,closed,pending'
-            
         ]);
 
-        Ticket::where('ticket_id', $id)->update(['status' => $validatedData['status']]);
+        // Agent will still be able to view tickets when you click view comments
+        if ($request->content != '') {
+                Reply::create([
+                'post_id' => $id,
+                'user_id' => Auth::id(),
+                'content' => $request->content
+            ]);
+        }
+        
+        
+        Ticket::where('ticket_id', $id)->update(['status' => $agent_update['status']]);
 
         Log::create([
-            'message' => 'Agent :' . auth()->users()->name . 'just updated a user ticket to' . $request->status    
+            'user' => auth()->user()->roles->pluck('name')->first(),
+            'message' => auth()->user()->name . 'just updated a user ticket to' . $request->status  . 'at 19:00'   
         ]);
 
         return redirect()->back();
