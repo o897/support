@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use Laravel\Socialite\Facades\Socialite;
 
 
 /*
@@ -19,7 +20,7 @@ use App\Http\Controllers\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 // */
-Route::get('/', function () {
+Route::get('/supporttick.com', function () {
     return view('welcome');
 });
 
@@ -32,6 +33,9 @@ Route::post('/register',[RegisterController::class,'register'])->name('register'
 // login routes
 Route::get('/signin',[LoginController::class,'loginForm'])->name('login.form');
 Route::post('/authenticate',[LoginController::class,'authenticate'])->name('authenticate');
+
+Route::get('/login/facebook', [LoginController::class,'redirectToFacebook']);
+Route::get('/login/facebook/callback', [LoginController::class,'handleFacebookCallback']);
 
 Route::post('/logout',[LoginController::class,'logout'])->name('logout');
 
@@ -48,8 +52,6 @@ Route::get('/new',[AdminController::class,'create']);
 Route::resource('agent',AgentController::class)->middleware('role:agent');
  
 
-
-
 //Comments and replies
 Route::get('/comments', [HomeController::class, 'index'])->name('comments');
 Route::get('/replies/{id}', [HomeController::class, 'replies'])->name('replies');
@@ -57,4 +59,14 @@ Route::delete('/reply/{id}',[HomeController::class,'destroy'])->name('reply.dest
 Route::post('/reply/{id}',[HomeController::class,'store'])->name('reply.store');
 
 // Auth::routes();
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+});
+ 
+Route::get('/auth/callback', function () {
+    $user = Socialite::driver('github')->user();
+ 
+    // $user->token
+});
 

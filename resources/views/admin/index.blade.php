@@ -6,7 +6,7 @@
           <div class="row">
             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
               <h3 class="font-weight-bold">Welcome {{ auth()->user()->name }}</h3>
-              <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+              <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">{{ $logs->count() }} logs!</span></h6>
             </div>
             <div class="col-12 col-xl-4">
              <div class="justify-content-end d-flex">
@@ -138,11 +138,12 @@
                         {{ $task->content }}
                       </label>
                     </div>
-                    <form action="/task/{{ $task->id }}" method="post">
+                    <a class="remove ti-close" href="/task/{{ $task->id }}" onclick="event.preventDefault(); document.getElementById('delete-task').submit()"></a>
+                    <form action="/task/{{ $task->id }}" method="post" id="delete-task">
                       @csrf
                       @method('DELETE')
-                      <button class="ti-close btn btn-icon"></button>
                     </form> 
+
                   </li>  
                   @empty
                   @endforelse
@@ -153,10 +154,8 @@
                     <input type="text" name="content" class="form-control todo-list-input"  placeholder="Add new task">
                     <button class="add btn btn-icon text-primary bg-transparent"><i class="icon-circle-plus"></i></button>
                   </div>
-                </form>
-                 
+                </form>        
               </div>
-             
             </div>
           </div>
         </div>
@@ -178,9 +177,9 @@
                   <tbody>
                   @foreach ($clients as $client)
                   <tr>
-                    <td class="pl-0 pb-0">{{ $client->location }}</td>
+                    <td class="pl-0 pb-0"><span class="font-weight-bold mr-2">{{ $client->location }}</span></td>
                     <td class="pb-0"><p class="mb-0"><span class="font-weight-bold mr-2">{{ $client->ticket_count  }}</span></p></td>
-                    <td class="pb-0">{{ \App\Models\User::where('location',$client->location)->count() }}</td>
+                    <td class="pb-0 text-muted">{{ \App\Models\User::where('location',$client->location)->count() }}</td>
                   </tr>  
                   @endforeach
                                                                      
@@ -220,10 +219,10 @@
             <div class="col-md-12 stretch-card grid-margin grid-margin-md-0">
               <div class="card data-icon-card-primary">
                 <div class="card-body">
-                  <p class="card-title text-white">February tickets </p>                      
+                  <p class="card-title text-white">Created account</p>                      
                   <div class="row">
                     <div class="col-8 text-white">
-                      <h3>654</h3>
+                      <h3>54</h3>
                       <p class="text-white font-weight-500 mb-0">43 more than the previous month</p>
                     </div>
                     <div class="col-4 background-icon">
@@ -239,19 +238,23 @@
             <div class="card-body">
               <p class="card-title">Log</p>
               <ul class="icon-data-list">
-               
+              
                 <li>
-                  <div class="">
                     @forelse ($logs as $log)
-                    <div>
-                      <p class="text-info mb-1">{{$log->message}}</p>
-                    </div>   
+                    <div class="d-flex">
+                      <img src="images/faces/face1.jpg" alt="user">
+                      <div>
+                        <p class="text-info mb-1">{{ $log->user }}</p>
+                        <p class="mb-0">{{ $log->message }}</p>
+                        <small>{{ $log->created_at }}</small>
+                      </div>
+                    </div>  
                     @empty
                         
                     @endforelse
-                    
-                  </div>
+              
                 </li>
+                
               </ul>
             </div>
           </div>

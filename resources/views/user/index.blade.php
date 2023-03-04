@@ -7,7 +7,7 @@
 <table class="table table-hover">
     <thead>
       <tr>
-        <th>Ticket id</th><!-- Show-->
+        <th>Ticket id</th>
         <th>Priority</th>
         <th>Categories</th>
         <th>Labels</th>
@@ -18,8 +18,8 @@
 
         @forelse ($tickets as $ticket)
         <tr>
-            <td><a class="text-decoration-none" href="/user/{{ $ticket->ticket_id }}">{{ $ticket->ticket_id }}</a></td>
-            <td class="text-{{ $ticket->priority == 'high' ? 'danger' : 'secondary' }}">{{ $ticket->priority }}</td>
+            <td><a class="text-decoration-none" href="/user/{{ $ticket->ticket_id }}" style="font-weight: bold">{{ $ticket->ticket_id }}</a></td>
+            <td class="text-{{ $ticket->priority == 'high' ? 'danger' : 'secondary' }}" style="font-weight: bold">{{ $ticket->priority }}</td>
             <td>{{ $ticket->categories }}</td>
             <td>{{ $ticket->label}}</td>
             <td>{{ $ticket->status ? $ticket->status : 'Not updated yet'}}</td>
@@ -27,11 +27,8 @@
         @empty
         @endforelse
         
-    
-    </tbody>
+      </tbody>
   </table>  
-
-
 </x-app>
 
 

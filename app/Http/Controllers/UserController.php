@@ -56,15 +56,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-    //  $amazon_s3 = Storage::disk('s3')->put('user_files/' . Auth::id, $request->file);
+        $path = Storage::putFileAs('files', $request->file('file'), $request->user()->id );
         $uuid = Str::uuid();
-        // Everytime user store a new ticket user ticket will also be store in the  comments table
+        
         $customer = ([ 
             'ticket_id' =>  $uuid,
             'post_id' => $uuid,
             'user_id' => Auth::id(),
             'name' => auth()->user()->name,
-            // 'file' => $amazon_s3,
+            'file' => $amazon_s3,
             'title' => $request->title,
             'content' => $request->input('content'),
             'priority' => $request->input('priority'),

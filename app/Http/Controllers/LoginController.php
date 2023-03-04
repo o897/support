@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class LoginController extends Controller
 {
-    //
 
     public function loginForm()
     {
@@ -17,7 +16,6 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
-        // dd($request->all());
 
         $credentials = $request->validate([
             'email' => ['required','email'],
@@ -64,4 +62,30 @@ class LoginController extends Controller
 
         return redirect('/');
     }
+
+
+public function redirectToFacebook()
+{
+    return Socialite::driver('facebook')->redirect();
+}
+
+public function handleFacebookCallback()
+{
+    $user = Socialite::driver('facebook')->user();
+
+    $existingUser = User::where('email', $user->email)->first();
+
+    if ($existingUser) {
+        Auth::login($existingUser);
+    } else {
+        $newUser = new User();
+        $newUser->name = $user->name;
+        $newUser->email = $user->email;
+        $newUser->password = bcrypt(str_random(16));
+        $newUser->save();
+        Auth::login($newUser);
+    }
+
+    return redirect('/user');
+}
 }

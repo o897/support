@@ -35,10 +35,7 @@
               </div>  
               @empty
                   
-              @endforelse
-              
-      
-           
+              @endforelse  
             </div>
           </div>
         </div>
